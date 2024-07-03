@@ -39,9 +39,9 @@ const Filters = () => {
           >
             <a href="#">
               <li
-                className="p-2 rounded-md hover:bg-[#F4F3F8] hover:text-[#0367DD] text-[GrayText]"
+                className="p-2 rounded-md hover:bg-[#F4F3F8] hover:text-[#0367DD] text-[GrayText] font-semibold"
                 style={{
-                  fontSize: "15px",
+                  fontSize: "14px",
                 }}
               >
                 Selected favorites
@@ -49,9 +49,9 @@ const Filters = () => {
             </a>
             <a href="#">
               <li
-                className="p-2 rounded-md hover:bg-[#F4F3F8] hover:text-[#0367DD] text-[GrayText]"
+                className="p-2 rounded-md hover:bg-[#F4F3F8] hover:text-[#0367DD] text-[GrayText] font-semibold"
                 style={{
-                  fontSize: "15px",
+                  fontSize: "14px",
                 }}
               >
                 New deals
@@ -59,9 +59,9 @@ const Filters = () => {
             </a>
             <a href="#">
               <li
-                className="p-2 rounded-md hover:bg-[#F4F3F8] hover:text-[#0367DD] text-[GrayText]"
+                className="p-2 rounded-md hover:bg-[#F4F3F8] hover:text-[#0367DD] text-[GrayText] font-semibold"
                 style={{
-                  fontSize: "15px",
+                  fontSize: "14px",
                 }}
               >
                 Highest rating

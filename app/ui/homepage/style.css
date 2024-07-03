@@ -430,23 +430,6 @@ swiper-container .swiper-notification {
   color: #0067e1 !important;
 }
 
-@media only screen and (min-width: 992px) {
-  .mb_hm_d_003 {
-    width: 100% !important;
-  }
-}
-
-@media only screen and (min-width: 770px) {
-  .mb_hm_d_003 {
-    width: 100% !important;
-  }
-}
-@media only screen and (min-width: 600px) {
-  .mb_hm_d_003 {
-    width: 100px !important;
-  }
-}
-
 @media only screen and (min-width: 770px) {
   .deals_res_cards_w_increase {
     height: 230px !important;
@@ -494,43 +477,6 @@ swiper-container .swiper-notification {
 }
 .all-buttons-likes-dislikes {
   display: flex;
-}
-
-.number-button {
-  color: #0367dd !important;
-}
-
-.number-button {
-  background-color: #fff;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 19px;
-}
-.icons-buttons {
-  padding: 10px;
-  height: 100%;
-}
-.number-button {
-  color: #0067e1 !important;
-}
-.number-button {
-  font-family: "Nunito Sans";
-  font-style: normal;
-}
-.number-button {
-  background-color: #fff;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-  color: rgba(27, 39, 56, 0.6);
-}
-.icons-buttons {
-  padding: 10px;
-  height: 100%;
-}
-.number-button {
-  font-family: "Nunito Sans";
-  font-style: normal;
 }
 
 .like-dislike-buttons {
@@ -616,20 +562,6 @@ swiper-container .swiper-notification {
 .text-heading {
   --tw-text-opacity: 1;
   color: rgba(33, 33, 33, var(--tw-text-opacity));
-}
-
-@media only screen and (min-width: 992px) {
-  .mbb_hid_div_003 {
-    display: flex !important;
-    align-items: center;
-  }
-}
-
-@media only screen and (min-width: 770px) {
-  .mbb_hid_div_003 {
-    display: flex !important;
-    align-items: center;
-  }
 }
 
 .av_p_text_003 {
