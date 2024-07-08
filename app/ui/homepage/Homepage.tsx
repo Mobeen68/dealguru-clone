@@ -2,6 +2,8 @@ import Carousel from "./components/Carousel";
 import "./style.css";
 import Filters from "./components/Filters";
 import Products from "./components/Products";
+import Favorites from "./components/Favorites";
+import Discounts from "./components/Discounts";
 
 export default function Homepage() {
   return (
@@ -19,13 +21,29 @@ export default function Homepage() {
           paddingBottom: "0",
         }}
       >
-        <Carousel />
+        {/* <Carousel /> */}
       </div>
       <div className="md:mt-4"></div>
       <div className="grid grid-cols-1 gap-5 md:gap-14 xl:gap-7 xl:grid-cols-7 2xl:grid-cols-7 mb-5 pt-2">
-        <div className="xl:col-span-5 2xl:col-span-5  border-gray-300 rounded-lg">
+        <div className="xl:col-span-5 2xl:col-span-5 border-gray-300 rounded-lg">
           <Filters />
-          <Products />
+          <div className="grid grid-cols-1 md:grid-cols-1">
+            <div className="h-auto">
+              <Products />
+              <Products />
+              <Products />
+              <Products />
+            </div>
+          </div>
+        </div>
+        <div
+          className="flex flex-col border-white rounded-lg col-span-full xl:col-span-2 row-span-full xl:row-auto"
+          style={{
+            height: "max-content",
+          }}
+        >
+          <Favorites />
+          <Discounts />
         </div>
       </div>
     </div>

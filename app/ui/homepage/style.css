@@ -564,9 +564,108 @@ swiper-container .swiper-notification {
   color: rgba(33, 33, 33, var(--tw-text-opacity));
 }
 
-.av_p_text_003 {
+.box-sidebar-deals-heading-002,
+.discounts-box-sidebar-deals-002 {
+  /* font-family: "Nunito Sans"; */
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2rem;
+  color: #1b2738;
+}
+
+.deals-sidebar-box-image-002 {
+  min-height: 65px;
+  width: 65px;
+}
+
+.deals-sidebar-box-image-002,
+.image-discount-deals-sidebar-002 {
+  background-size: cover;
+  height: 65px !important;
+  object-fit: scale-down;
+  background-position-y: center;
+  background-position-x: center;
+  min-width: 65px;
+}
+
+.ac_ill_003 {
+  /* font-family: "Nunito Sans"; */
+  font-style: normal;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.ac_ill_003,
+.nm_text_003 {
+  font-weight: 400;
+  color: #1b2738;
+}
+.sidebar-deals-title-002 {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.deals-counting-likes-sidebar-deals-002 {
+  margin-left: 2px;
+  padding-left: 2px;
+  font-weight: 600;
   color: rgba(27, 39, 56, 0.5);
-  font-size: 11px;
-  font-family: "Nunito Sans";
+}
+
+.deals-counting-likes-sidebar-deals-002,
+.nm_text_003 {
+  /* font-family: "Nunito Sans"; */
+  font-style: normal;
+  font-size: 15px;
+  line-height: 16px;
+}
+
+.visa_hide_btn {
+  width: 180px;
+  font-size: 13.5px;
+  cursor: pointer;
+  color: #fff;
+  background: #0067e1;
+  padding: 4.5px;
+  margin-top: 10px;
+  border-radius: 5px !important;
+  overflow: hidden;
+  transition: border-radius;
+  position: relative;
+  letter-spacing: 0.2px;
   font-weight: 700;
+}
+
+.visa_hide_btn {
+  /* font-family: "Nunito Sans"; */
+  font-style: normal;
+}
+
+.visa_hide_btn .hidden_code {
+  border-radius: 0;
+  position: absolute;
+  background: #f5f5f5;
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+  padding: 4.5px;
+  left: 0;
+  color: #0067e1;
+  border: none !important;
+  z-index: 9;
+  display: none;
+}
+
+.visa_hide_btn:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-style: solid;
+  border-width: 8.5px;
+  border-color: #fff #fff #9cf #9cf;
+  border-radius: 0;
+  transition: border-width 0.2s;
 }
