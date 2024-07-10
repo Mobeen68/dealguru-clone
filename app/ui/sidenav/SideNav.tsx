@@ -4,7 +4,8 @@ import { FaBars } from "react-icons/fa6";
 import logo from "@/app/assets/images/logo.png";
 import { Link } from "@chakra-ui/next-js";
 import { useSession } from "next-auth/react";
-
+import { Avatar } from "@chakra-ui/react";
+import productLogo from "@/app/assets/images/specilnew2.png";
 export default function SideNav() {
   const { status } = useSession();
 
@@ -56,17 +57,46 @@ export default function SideNav() {
         </label>
       </div>
       <div className="flex flex-row items-center justify-end gap-x-5 w-1/2">
-        {status === "authenticated" ? (
-          <button className="px-4 h-9 border rounded-md bg-white border-[#0067e1] text-[#0067e1] fill-white font-semibold lg:text-sm text-[10px] hidden md:block">
-            <Link
-              href={"/dashboard"}
-              style={{
-                textDecoration: "none",
-              }}
-            >
-              Dashboard
-            </Link>
-          </button>
+        {status !== "authenticated" ? (
+          <div className="items-center transition-all md:flex ps-3 w-full">
+            <div className="flex md:gap-x-4 align-center">
+              <div
+                className="flex gap-5 relative hide-in-mobile-view"
+                style={{
+                  alignItems: "center",
+                }}
+              >
+                <button className="gap-3 flex items-center justify-center flex-shrink-0 h-auto relative focus:outline-none transform">
+                  <Image
+                    src={productLogo}
+                    style={{
+                      backgroundColor: "#f6bdcf",
+                      padding: "0px",
+                      borderRadius: "200px",
+                      minHeight: "40px",
+                      backgroundSize: "cover",
+                      width: "40px",
+                      height: "40px !important",
+                      objectFit: "scale-down",
+                      margin: "0 auto",
+                    }}
+                    alt="avatar"
+                  />
+                </button>
+              </div>
+            </div>
+            <div className="flex items-center gap-x-1">My Account</div>
+            <button className="px-4 h-9 bg-[#0067e1] border border-[#0067e1] text-white fill-white hover:text-[#0067e1] hover:fill-[#0067e1] hover:bg-white rounded-md lg:font-semibold lg:text-sm text-[10px]">
+              <Link
+                href={"/dashboard"}
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                + NEW DEAL
+              </Link>
+            </button>
+          </div>
         ) : (
           <>
             <button className="px-4 h-9 bg-[#0067e1] border border-[#0067e1] text-white fill-white hover:text-[#0067e1] hover:fill-[#0067e1] hover:bg-white rounded-md lg:font-semibold lg:text-sm text-[10px]">

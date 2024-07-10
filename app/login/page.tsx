@@ -128,7 +128,7 @@ export default function LoginPage() {
                   </>
                 ) : (
                   <>
-                    <SignupForm />
+                    <SignupForm setForm={setForm} />
                     <div
                       className="label_n_design mt-1"
                       style={{

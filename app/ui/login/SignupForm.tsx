@@ -1,37 +1,55 @@
-import { Spinner } from "@chakra-ui/react";
+import { register } from "@/app/actions/register";
+import { Spinner, useToast } from "@chakra-ui/react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useRef, useState } from "react";
 import { CiMail } from "react-icons/ci";
 import { IoKeySharp, IoPersonSharp } from "react-icons/io5";
 
-const SignupForm = () => {
+interface SignupFormProps {
+  setForm: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const SignupForm = ({ setForm }: SignupFormProps) => {
   const [error, setError] = useState("");
   const router = useRouter();
   const ref = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const toast = useToast();
+
+  const handleSubmit = async (formData: FormData) => {
+    // console.log(formData.get("password"));
+
     setLoading(true);
-    const formData = new FormData(event.currentTarget);
-    const res = await signIn("credentials", {
+    const r = await register({
       email: formData.get("email"),
       password: formData.get("password"),
-      redirect: false,
+      name: formData.get("name"),
     });
-    if (res?.error) {
-      setError(res.error as string);
+    ref.current?.reset();
+    if (r?.error) {
+      setError(r.error);
       setLoading(false);
-    }
-    if (res?.ok) {
-      ref.current?.reset();
-      return router.push("/");
+      return;
+    } else {
+      toast({
+        title: "Registered successfully.",
+        description: "Please login to continue.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+      return setForm("login");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col justify-center">
+    <form
+      action={handleSubmit}
+      ref={ref}
+      className="flex flex-col justify-center"
+    >
       {error && <div className="text-red-500">{error}</div>}
       <div className="flex flex-col space-y-3.5">
         <div className="block">
@@ -120,7 +138,6 @@ const SignupForm = () => {
             </div>
           ) : (
             <button
-              type="submit"
               style={{
                 margin: "0",
                 width: "100%",
