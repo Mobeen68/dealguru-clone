@@ -1,13 +1,34 @@
 "use client";
 import Image from "next/image";
-import { FaBars } from "react-icons/fa6";
+import { FaBars, FaBell, FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import logo from "@/app/assets/images/logo.png";
 import { Link } from "@chakra-ui/next-js";
 import { useSession } from "next-auth/react";
-import { Avatar } from "@chakra-ui/react";
+import {
+  Avatar,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+  useDisclosure,
+} from "@chakra-ui/react";
 import productLogo from "@/app/assets/images/specilnew2.png";
+import {
+  IoIosArrowDown,
+  IoIosArrowUp,
+  IoIosLogOut,
+  IoMdChatbubbles,
+  IoMdPricetag,
+  IoMdSettings,
+} from "react-icons/io";
+import { MdWidgets } from "react-icons/md";
+import { IoLogOut } from "react-icons/io5";
 export default function SideNav() {
   const { status } = useSession();
+  const { isOpen, onToggle, onClose } = useDisclosure();
 
   return (
     <header
@@ -58,34 +79,90 @@ export default function SideNav() {
       </div>
       <div className="flex flex-row items-center justify-end gap-x-5 w-1/2">
         {status !== "authenticated" ? (
-          <div className="items-center transition-all md:flex ps-3 w-full">
-            <div className="flex md:gap-x-4 align-center">
-              <div
-                className="flex gap-5 relative hide-in-mobile-view"
-                style={{
-                  alignItems: "center",
-                }}
+          <div className="flex items-center justify-between ps-3 w-full">
+            <div
+              className="flex items-center"
+              onClick={onToggle}
+              style={{ zIndex: 999 }}
+            >
+              <Popover
+                returnFocusOnClose={false}
+                isOpen={isOpen}
+                onClose={onClose}
+                placement="bottom"
+                closeOnBlur={false}
+                size={"xs"}
               >
-                <button className="gap-3 flex items-center justify-center flex-shrink-0 h-auto relative focus:outline-none transform">
-                  <Image
-                    src={productLogo}
+                <PopoverTrigger>
+                  <Avatar
+                    // name="Dan Abrahmov"
+                    src="https://bit.ly/broken-link"
                     style={{
-                      backgroundColor: "#f6bdcf",
                       padding: "0px",
                       borderRadius: "200px",
                       minHeight: "40px",
                       backgroundSize: "cover",
                       width: "40px",
-                      height: "40px !important",
+                      height: "40px",
                       objectFit: "scale-down",
                       margin: "0 auto",
                     }}
-                    alt="avatar"
                   />
-                </button>
+                </PopoverTrigger>
+                <PopoverContent
+                  style={{
+                    width: "200px",
+                    boxShadow: "-20px 20px 40px -4px rgb(145 158 171 / 24%)",
+                    filter: "drop-shadow(0px 0px 2px rgba(145, 158, 171, .24))",
+                  }}
+                >
+                  <PopoverHeader fontWeight="semibold">
+                    dealmobeene981
+                  </PopoverHeader>
+                  <PopoverArrow />
+                  <PopoverBody>
+                    <ul>
+                      <li className="flex items-center">
+                        <MdWidgets className="text-gray-400 me-2" />
+                        My account
+                      </li>
+                      <li className="flex items-center">
+                        <IoMdPricetag className="text-gray-400 me-2" />
+                        My deals
+                      </li>
+                      <li className="flex items-center">
+                        <FaBookmark className="text-gray-400 me-2" />
+                        Saved offers
+                      </li>
+                      <li className="flex items-center">
+                        <IoMdChatbubbles className="text-gray-400 me-2" />
+                        My discussions
+                      </li>
+                      <li className="flex items-center">
+                        <IoMdSettings className="text-gray-400 me-2" />
+                        Settings
+                      </li>
+                      <li className="flex items-center">
+                        <IoLogOut className="text-gray-400 me-2" />
+                        Log out
+                      </li>
+                    </ul>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+              <div className="ps-2 flex items-center justify-center">
+                My Account{" "}
+                {isOpen ? (
+                  <IoIosArrowUp className="text-gray-400 ms-1" />
+                ) : (
+                  <IoIosArrowDown className="text-gray-400 ms-1" />
+                )}
               </div>
             </div>
-            <div className="flex items-center gap-x-1">My Account</div>
+
+            <div>
+              <FaBell className="text-gray-400" />
+            </div>
             <button className="px-4 h-9 bg-[#0067e1] border border-[#0067e1] text-white fill-white hover:text-[#0067e1] hover:fill-[#0067e1] hover:bg-white rounded-md lg:font-semibold lg:text-sm text-[10px]">
               <Link
                 href={"/dashboard"}
