@@ -3,8 +3,11 @@ import Image from "next/image";
 import { FaBars } from "react-icons/fa6";
 import logo from "@/app/assets/images/logo.png";
 import { Link } from "@chakra-ui/next-js";
+import { useSession } from "next-auth/react";
 
 export default function SideNav() {
+  const { status } = useSession();
+
   return (
     <header
       className="flex items-center justify-between gap-x-8 w-full h-16 lg:h-16 xl:h-16 lg:px-10 px-2 mx-auto"
@@ -53,26 +56,41 @@ export default function SideNav() {
         </label>
       </div>
       <div className="flex flex-row items-center justify-end gap-x-5 w-1/2">
-        <button className="px-4 h-9 bg-[#0067e1] border border-[#0067e1] text-white fill-white hover:text-[#0067e1] hover:fill-[#0067e1] hover:bg-white rounded-md lg:font-semibold lg:text-sm text-[10px]">
-          <Link
-            href={"/login"}
-            style={{
-              textDecoration: "none",
-            }}
-          >
-            Join For Free
-          </Link>
-        </button>
-        <button className="px-4 h-9 border rounded-md bg-white border-[#0067e1] text-[#0067e1] fill-white font-semibold lg:text-sm text-[10px] hidden md:block">
-          <Link
-            href={"/login"}
-            style={{
-              textDecoration: "none",
-            }}
-          >
-            Log in
-          </Link>
-        </button>
+        {status === "authenticated" ? (
+          <button className="px-4 h-9 border rounded-md bg-white border-[#0067e1] text-[#0067e1] fill-white font-semibold lg:text-sm text-[10px] hidden md:block">
+            <Link
+              href={"/dashboard"}
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              Dashboard
+            </Link>
+          </button>
+        ) : (
+          <>
+            <button className="px-4 h-9 bg-[#0067e1] border border-[#0067e1] text-white fill-white hover:text-[#0067e1] hover:fill-[#0067e1] hover:bg-white rounded-md lg:font-semibold lg:text-sm text-[10px]">
+              <Link
+                href={"/login"}
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                Join For Free
+              </Link>
+            </button>
+            <button className="px-4 h-9 border rounded-md bg-white border-[#0067e1] text-[#0067e1] fill-white font-semibold lg:text-sm text-[10px] hidden md:block">
+              <Link
+                href={"/login"}
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                Log in
+              </Link>
+            </button>
+          </>
+        )}
       </div>
     </header>
   );
