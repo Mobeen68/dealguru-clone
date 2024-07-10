@@ -1,19 +1,44 @@
+"use client";
 import Image from "next/image";
 import loginImg from "../assets/images/login-right-side6-min.png";
 import "@/app/login/style.css";
 import { FaFacebook, FaGoogle } from "react-icons/fa6";
 import { CiMail } from "react-icons/ci";
 import { Metadata, ResolvingMetadata } from "next";
+import { IoKeySharp } from "react-icons/io5";
+import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { Link } from "@chakra-ui/next-js";
 
-export async function generateMetadata(
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  return {
-    title: `Login`,
-  };
-}
+// export async function generateMetadata(
+//   parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//   return {
+//     title: `Login`,
+//   };
+// }
 
 export default function LoginPage() {
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const res = await signIn("credentials", {
+      email: formData.get("email"),
+      password: formData.get("password"),
+      redirect: false,
+    });
+    if (res?.error) {
+      setError(res.error as string);
+    }
+    if (res?.ok) {
+      return router.push("/");
+    }
+  };
+
   return (
     <div className="mx-auto max-w-[1920px] px-3 2xl:px-16 mt-8">
       <div className="py-3 lg:py-3">
@@ -111,7 +136,12 @@ export default function LoginPage() {
                   </span>
                 </div>
 
-                <form action="" className="flex flex-col justify-center">
+                <form
+                  action=""
+                  onSubmit={handleSubmit}
+                  className="flex flex-col justify-center"
+                >
+                  {error && <div className="text-red-500">{error}</div>}
                   <div className="flex flex-col space-y-3.5">
                     <div className="block">
                       <input
@@ -127,6 +157,30 @@ export default function LoginPage() {
                         placeholder="Email"
                       />
                       <CiMail
+                        width={18}
+                        height={14}
+                        color="#6c7c88"
+                        style={{
+                          position: "absolute",
+                          marginTop: "-33px",
+                          marginLeft: "16px",
+                        }}
+                      />
+                    </div>
+                    <div className="block">
+                      <input
+                        type="password"
+                        name=""
+                        id=""
+                        className="input_feilds_logins email_address_field py-2 px-4 md:px-5 w-full appearance-none border text-input lg:text-sm font-body rounded-md placeholder-body min-h-12 transition duration-200 ease-in-out bg-white border-gray-300 focus:outline-none focus:border-heading h-11 md:h-12"
+                        style={{
+                          background: "#FAFBFE",
+                          // border: "1px solid #E7EBF3",
+                          paddingLeft: "44px",
+                        }}
+                        placeholder="Password"
+                      />
+                      <IoKeySharp
                         width={18}
                         height={14}
                         color="#6c7c88"
@@ -157,23 +211,27 @@ export default function LoginPage() {
                             }
                           ></div>
                         </label>
-                        <label
-                          htmlFor="remeberme"
-                          className="flex-shrink-0 text-sm text-heading ps-3 cursor-pointer label_n_design"
-                        >
-                          <div style={{ verticalAlign: "inherit" }}>
-                            <div style={{ verticalAlign: "inherit" }}>
-                              Remember me
-                            </div>
+                        <div className="flex items-center justify-between w-full">
+                          <label
+                            htmlFor="remeberme"
+                            className="flex-shrink-0 text-sm text-heading ps-3 cursor-pointer label_n_design"
+                          >
+                            Remember me
+                          </label>
+                          <div className="label_n_design">
+                            Don&apos;t have an account?{" "}
+                            <Link href="/signup" className="label_n_design">
+                              Sign Up
+                            </Link>
                           </div>
-                        </label>
+                        </div>
                       </div>
                     </div>
                     <div className="relative">
                       <div style={{ verticalAlign: "inherit" }}>
                         <div style={{ verticalAlign: "inherit" }}>
                           <button
-                            type="button"
+                            type="submit"
                             style={{
                               margin: "0",
                               width: "100%",

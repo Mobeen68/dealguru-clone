@@ -1,7 +1,7 @@
 "use server";
 import { connectDB } from "@/app/lib/mongodb";
 import User from "@/app/models/User";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export const register = async (values: any) => {
   const { email, password, name } = values;
@@ -15,7 +15,7 @@ export const register = async (values: any) => {
       };
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ 
+    const user = new User({
       name,
       email,
       password: hashedPassword,
