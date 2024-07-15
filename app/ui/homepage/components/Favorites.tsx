@@ -6,8 +6,16 @@ import { BiSolidLike } from "react-icons/bi";
 const Favorites = () => {
   return (
     <div className="order-1">
-      <div className="flex items-center justify-between -mt-2 mb-4 md:mb-5 lg:mb-3 xl:mb-3 2xl:mb-3 3xl:mb-3 pt-2">
-        <h2 className="text-lg md:text-xl lg:text-2xl 2xl:text-3xl font-bold text-heading box-sidebar-deals-heading-002 pb-2">
+      <div className="flex items-baseline justify-between mb-4 md:mb-5 2xl:mb-3 pt-2">
+        <h2
+          className="text-lg md:text-xl lg:text-2xl 2xl:text-3xl font-bold text-heading pb-2"
+          style={{
+            fontStyle: "normal",
+            fontWeight: 500,
+            fontSize: "2rem",
+            color: "#1b2738",
+          }}
+        >
           Selected Favorites
         </h2>
       </div>

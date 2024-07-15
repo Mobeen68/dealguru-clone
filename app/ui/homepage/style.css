@@ -564,15 +564,6 @@ swiper-container .swiper-notification {
   color: rgba(33, 33, 33, var(--tw-text-opacity));
 }
 
-.box-sidebar-deals-heading-002,
-.discounts-box-sidebar-deals-002 {
-  /* font-family: "Nunito Sans"; */
-  font-style: normal;
-  font-weight: 500;
-  font-size: 2rem;
-  color: #1b2738;
-}
-
 .deals-sidebar-box-image-002 {
   min-height: 65px;
   width: 65px;

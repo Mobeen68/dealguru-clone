@@ -37,7 +37,7 @@ export default function Homepage() {
           </div>
         </div>
         <div
-          className="flex flex-col border-white rounded-lg col-span-full xl:col-span-2 row-span-full xl:row-auto"
+          className="hidden xl:flex flex-col border-white rounded-lg col-span-full xl:col-span-2 row-span-full xl:row-auto"
           style={{
             height: "max-content",
           }}

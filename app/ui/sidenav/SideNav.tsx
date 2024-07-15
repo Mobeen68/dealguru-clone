@@ -78,20 +78,18 @@ export default function SideNav() {
         </label>
       </div>
       <div className="flex flex-row items-center justify-end gap-x-5 w-1/2">
-        {status !== "authenticated" ? (
-          <div className="flex items-center justify-between ps-3 w-full">
+        {status === "authenticated" ? (
+          <div className="flex items-center justify-between ps-3 w-full cursor-pointer">
             <div
               className="flex items-center"
               onClick={onToggle}
               style={{ zIndex: 999 }}
             >
               <Popover
-                returnFocusOnClose={false}
+                // returnFocusOnClose={false}
                 isOpen={isOpen}
                 onClose={onClose}
                 placement="bottom"
-                closeOnBlur={false}
-                size={"xs"}
               >
                 <PopoverTrigger>
                   <Avatar

@@ -1,7 +1,5 @@
 import { register } from "@/app/actions/register";
 import { Spinner, useToast } from "@chakra-ui/react";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import React, { FormEvent, useRef, useState } from "react";
 import { CiMail } from "react-icons/ci";
 import { IoKeySharp, IoPersonSharp } from "react-icons/io5";
@@ -12,7 +10,6 @@ interface SignupFormProps {
 
 const SignupForm = ({ setForm }: SignupFormProps) => {
   const [error, setError] = useState("");
-  const router = useRouter();
   const ref = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +17,6 @@ const SignupForm = ({ setForm }: SignupFormProps) => {
 
   const handleSubmit = async (formData: FormData) => {
     // console.log(formData.get("password"));
-
     setLoading(true);
     const r = await register({
       email: formData.get("email"),

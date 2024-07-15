@@ -23,8 +23,9 @@ const Filters = () => {
           Best deals right now
         </h1>
       </div>
-      <div className="lg:flex sm:pb-1 hidden w-full">
+      <div className="lg:flex sm:pb-1 hidden w-full justify-end">
         <div
+          className=""
           style={{
             background: "#fff",
             padding: "5px",
@@ -39,7 +40,7 @@ const Filters = () => {
           >
             <a href="#">
               <li
-                className="p-2 rounded-md hover:bg-[#F4F3F8] hover:text-[#0367DD] text-[GrayText] font-semibold"
+                className="p-2 rounded-md bg-[#F4F3F8] text-[#0367DD] font-semibold"
                 style={{
                   fontSize: "14px",
                 }}
@@ -84,7 +85,7 @@ const Filters = () => {
                 listStyle: "none",
               }}
             >
-              <a href="#">
+              {/* <a href="#">
                 <li
                   className="p-2 rounded-md hover:bg-[#F4F3F8] hover:text-[#0367DD] text-[GrayText]"
                   style={{
@@ -93,10 +94,10 @@ const Filters = () => {
                 >
                   <IoGrid />
                 </li>
-              </a>
+              </a> */}
               <a href="#">
                 <li
-                  className="p-2 rounded-md hover:bg-[#F4F3F8] hover:text-[#0367DD] text-[GrayText]"
+                  className="p-2 rounded-md bg-[#F4F3F8] text-[#0367DD] text-[GrayText]"
                   style={{
                     fontSize: 25,
                   }}
