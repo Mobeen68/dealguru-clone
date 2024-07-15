@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "./custom.css";
 import SideNav from "./ui/sidenav/SideNav";
 import Footer from "./ui/footer/Footer";
 import { Provider } from "./provider";
@@ -36,7 +37,7 @@ export default function RootLayout({
             <header className="w-full h-16 bg-white">
               <SideNav />
             </header>
-            <main className="relative flex-grow main mx-auto">{children}</main>
+            <main className="relative flex-grow main">{children}</main>
             <footer
               className="border-b-4 border-heading 3xl:mt-20 pt-2.5 lg:pt-0 2xl:pt-2 bg-white lg:px-10 px-2"
               style={{

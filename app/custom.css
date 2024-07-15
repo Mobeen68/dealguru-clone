@@ -1,0 +1,129 @@
+.ss_popup_a {
+  height: 36px;
+
+  background: #ffffff;
+  border-radius: 6px;
+  /* font-family: "Nunito Sans"; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+
+  /* identical to box height */
+
+  /* cobalt blue */
+  color: #1b2738;
+}
+.aside_back_color_003 {
+  color: #0367dd;
+}
+.aside_back_color_003 svg path {
+  fill: #0367dd !important;
+  fill-opacity: unset;
+}
+
+.listing_deal_para_title003 {
+  /* font-weight: 700 !important; */
+  font-size: 24px !important;
+  line-height: 33px !important;
+}
+
+.listing_deal_para_title003 {
+  /* font-family: "Nunito Sans" !important; */
+  font-style: normal !important;
+  color: #1b2738 !important;
+}
+
+.w_f_deal_btn {
+  transition: transform 125ms;
+}
+
+.w_f_deal_btn,
+.w_f_deal_btn:hover {
+  border: 1px solid #0067e1;
+}
+
+.avtar_image-default {
+  background-color: #fff;
+  padding: 23px;
+  border-radius: 200px;
+  min-height: 150px;
+  background-size: cover;
+  width: 155px;
+  height: 150px !important;
+  object-fit: scale-down;
+  margin: 0 auto;
+  border: 1px solid #d0d0d0;
+}
+
+.ac_pc_label_003 {
+  /* font-family: "Nunito Sans"; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #1b2738;
+}
+
+.ac_pc_input_003 {
+  height: 52px;
+  background: #ffffff;
+  border-radius: 10px;
+  /* font-family: "Nunito Sans"; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1b2738;
+}
+
+.pf_st_btn_003 {
+  height: 52px;
+  background: rgba(27, 39, 56, 0.4);
+  border-radius: 10px;
+}
+
+.active-buton-transition {
+  transition: transform 125ms;
+}
+
+.dshbrd_lbl_003 {
+  /* font-family: "Nunito Sans"; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: rgba(47, 47, 47, 1);
+  border-bottom: 1px solid rgba(27, 39, 56, 0.1);
+}
+
+.deal_cn_txt_003 {
+  /* font-family: "Nunito Sans"; */
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1b2738;
+}
+
+.coming-soon-txt {
+  background: #0067e1;
+  color: white;
+  text-align: center;
+  padding: 5px 5px;
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  top: 34px;
+  margin-top: -34px;
+  z-index: 1;
+}
+
+.deal_p_txt_003 {
+  /* font-family: "Nunito Sans"; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #1b2738;
+}

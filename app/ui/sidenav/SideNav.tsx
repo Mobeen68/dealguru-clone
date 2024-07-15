@@ -121,27 +121,27 @@ export default function SideNav() {
                   <PopoverBody>
                     <ul>
                       <li className="flex items-center">
-                        <MdWidgets className="text-gray-400 me-2" />
+                        <MdWidgets className="text-[#c6c9ce] me-2" />
                         My account
                       </li>
                       <li className="flex items-center">
-                        <IoMdPricetag className="text-gray-400 me-2" />
+                        <IoMdPricetag className="text-[#c6c9ce] me-2" />
                         My deals
                       </li>
                       <li className="flex items-center">
-                        <FaBookmark className="text-gray-400 me-2" />
+                        <FaBookmark className="text-[#c6c9ce] me-2" />
                         Saved offers
                       </li>
                       <li className="flex items-center">
-                        <IoMdChatbubbles className="text-gray-400 me-2" />
+                        <IoMdChatbubbles className="text-[#c6c9ce] me-2" />
                         My discussions
                       </li>
                       <li className="flex items-center">
-                        <IoMdSettings className="text-gray-400 me-2" />
+                        <IoMdSettings className="text-[#c6c9ce] me-2" />
                         Settings
                       </li>
                       <li className="flex items-center">
-                        <IoLogOut className="text-gray-400 me-2" />
+                        <IoLogOut className="text-[#c6c9ce] me-2" />
                         Log out
                       </li>
                     </ul>
@@ -151,15 +151,15 @@ export default function SideNav() {
               <div className="ps-2 flex items-center justify-center">
                 My Account{" "}
                 {isOpen ? (
-                  <IoIosArrowUp className="text-gray-400 ms-1" />
+                  <IoIosArrowUp className="text-[#c6c9ce] ms-1" />
                 ) : (
-                  <IoIosArrowDown className="text-gray-400 ms-1" />
+                  <IoIosArrowDown className="text-[#c6c9ce] ms-1" />
                 )}
               </div>
             </div>
 
             <div>
-              <FaBell className="text-gray-400" />
+              <FaBell className="text-[#c6c9ce]" />
             </div>
             <button className="px-4 h-9 bg-[#0067e1] border border-[#0067e1] text-white fill-white hover:text-[#0067e1] hover:fill-[#0067e1] hover:bg-white rounded-md lg:font-semibold lg:text-sm text-[10px]">
               <Link

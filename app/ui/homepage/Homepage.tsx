@@ -45,6 +45,30 @@ export default function Homepage() {
           <Favorites />
           <Discounts />
         </div>
+        <div
+          className="xl:col-span-5 2xl:col-span-5  border-gray-300 rounded-lg"
+          style={{
+            textAlign: "center",
+            margin: "0 auto",
+            marginTop: "-20px",
+            width: "100%",
+          }}
+        >
+          <span
+            style={{
+              textAlign: "center",
+              padding: "5px",
+              display: "block",
+              bottom: "0px",
+              color: "rgb(3, 103, 221)",
+              border: "1px solid rgb(3, 103, 221)",
+              fontFamily: "Nunito Sans",
+              borderRadius: "8px",
+            }}
+          >
+            View more deals
+          </span>
+        </div>
       </div>
     </div>
   );

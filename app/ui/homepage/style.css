@@ -202,20 +202,7 @@ swiper-slide {
 .sp_mc_003 {
   text-transform: initial;
 }
-.active-buton-transition,
-.button-link,
-.clickout-button,
-.deals-btn-mobile-view,
-.like-dislike-buttons,
-.load_more_base_button,
-.save-grid-deal-card-003,
-.show_hidden_sorting_div,
-.slides-tags-header,
-.social_login_st,
-.visa_hide_btn,
-.w_f_deal_btn {
-  transition: transform 125ms;
-}
+
 .rounded-md {
   border-radius: 0.375rem !important;
 }
