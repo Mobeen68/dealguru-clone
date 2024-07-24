@@ -9,26 +9,32 @@ import {
   Popover,
   PopoverArrow,
   PopoverBody,
-  PopoverCloseButton,
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
   useDisclosure,
 } from "@chakra-ui/react";
-import productLogo from "@/app/assets/images/specilnew2.png";
 import {
   IoIosArrowDown,
   IoIosArrowUp,
-  IoIosLogOut,
   IoMdChatbubbles,
   IoMdPricetag,
   IoMdSettings,
 } from "react-icons/io";
 import { MdWidgets } from "react-icons/md";
 import { IoLogOut } from "react-icons/io5";
+import { useRef } from "react";
+import SideDrawer from "./SideDrawer";
 export default function SideNav() {
   const { status } = useSession();
   const { isOpen, onToggle, onClose } = useDisclosure();
+  const {
+    isOpen: onDrawerOpen,
+    onOpen,
+    onClose: onDrawerClose,
+  } = useDisclosure();
+
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   return (
     <header
@@ -38,9 +44,18 @@ export default function SideNav() {
     >
       <div className="flex justify-between items-center gap-x-2 w-1/3">
         <div className="hidden lg:block">
-          <button className="p-[7px] rounded-lg border border-gray-300">
+          <button
+            className="p-[7px] rounded-lg border border-gray-300"
+            ref={btnRef}
+            onClick={onOpen}
+          >
             <FaBars className="text-gray-600" size={22} />
           </button>
+          <SideDrawer
+            isOpen={onDrawerOpen}
+            onClose={onDrawerClose}
+            btnRef={btnRef}
+          />
         </div>
         <div className="w-full">
           <Link className="" href="/">

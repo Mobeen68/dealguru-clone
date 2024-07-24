@@ -127,3 +127,15 @@
   line-height: 16px;
   color: #1b2738;
 }
+
+.item-sidebar-desktop-0022 {
+  font-size: 16px;
+  /* font-family: "Nunito Sans"; */
+  width: 100%;
+  display: block;
+  padding: 11px !important;
+  margin: 0;
+  display: flex;
+  column-gap: 12px;
+  align-items: center;
+}
