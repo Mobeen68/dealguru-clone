@@ -1,40 +1,12 @@
-"use client";
 import Image from "next/image";
-import { FaBars, FaBell, FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import logo from "@/app/assets/images/logo.png";
-import { Link } from "@chakra-ui/next-js";
-import { useSession } from "next-auth/react";
-import {
-  Avatar,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-  useDisclosure,
-} from "@chakra-ui/react";
-import {
-  IoIosArrowDown,
-  IoIosArrowUp,
-  IoMdChatbubbles,
-  IoMdPricetag,
-  IoMdSettings,
-} from "react-icons/io";
-import { MdWidgets } from "react-icons/md";
-import { IoLogOut } from "react-icons/io5";
-import { useRef } from "react";
 import SideDrawer from "./SideDrawer";
-export default function SideNav() {
-  const { status } = useSession();
-  const { isOpen, onToggle, onClose } = useDisclosure();
-  const {
-    isOpen: onDrawerOpen,
-    onOpen,
-    onClose: onDrawerClose,
-  } = useDisclosure();
-
-  const btnRef = useRef<HTMLButtonElement>(null);
+import CTA from "./CTA";
+import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/lib/auth";
+export default async function SideNav() {
+  const session = await getServerSession(authOptions);
 
   return (
     <header
@@ -43,20 +15,7 @@ export default function SideNav() {
       id="header"
     >
       <div className="flex justify-between items-center gap-x-2 w-1/3">
-        <div className="hidden lg:block">
-          <button
-            className="p-[7px] rounded-lg border border-gray-300"
-            ref={btnRef}
-            onClick={onOpen}
-          >
-            <FaBars className="text-gray-600" size={22} />
-          </button>
-          <SideDrawer
-            isOpen={onDrawerOpen}
-            onClose={onDrawerClose}
-            btnRef={btnRef}
-          />
-        </div>
+        <SideDrawer />
         <div className="w-full">
           <Link className="" href="/">
             <Image
@@ -93,124 +52,7 @@ export default function SideNav() {
         </label>
       </div>
       <div className="flex flex-row items-center justify-end gap-x-5 w-1/2">
-        {status === "authenticated" ? (
-          <div className="flex items-center justify-between ps-3 w-full cursor-pointer">
-            <div
-              className="flex items-center"
-              onClick={onToggle}
-              style={{ zIndex: 999 }}
-            >
-              <Popover
-                // returnFocusOnClose={false}
-                isOpen={isOpen}
-                onClose={onClose}
-                placement="bottom"
-              >
-                <PopoverTrigger>
-                  <Avatar
-                    // name="Dan Abrahmov"
-                    src="https://bit.ly/broken-link"
-                    style={{
-                      padding: "0px",
-                      borderRadius: "200px",
-                      minHeight: "40px",
-                      backgroundSize: "cover",
-                      width: "40px",
-                      height: "40px",
-                      objectFit: "scale-down",
-                      margin: "0 auto",
-                    }}
-                  />
-                </PopoverTrigger>
-                <PopoverContent
-                  style={{
-                    width: "200px",
-                    boxShadow: "-20px 20px 40px -4px rgb(145 158 171 / 24%)",
-                    filter: "drop-shadow(0px 0px 2px rgba(145, 158, 171, .24))",
-                  }}
-                >
-                  <PopoverHeader fontWeight="semibold">
-                    dealmobeene981
-                  </PopoverHeader>
-                  <PopoverArrow />
-                  <PopoverBody>
-                    <ul>
-                      <li className="flex items-center">
-                        <MdWidgets className="text-[#c6c9ce] me-2" />
-                        My account
-                      </li>
-                      <li className="flex items-center">
-                        <IoMdPricetag className="text-[#c6c9ce] me-2" />
-                        My deals
-                      </li>
-                      <li className="flex items-center">
-                        <FaBookmark className="text-[#c6c9ce] me-2" />
-                        Saved offers
-                      </li>
-                      <li className="flex items-center">
-                        <IoMdChatbubbles className="text-[#c6c9ce] me-2" />
-                        My discussions
-                      </li>
-                      <li className="flex items-center">
-                        <IoMdSettings className="text-[#c6c9ce] me-2" />
-                        Settings
-                      </li>
-                      <li className="flex items-center">
-                        <IoLogOut className="text-[#c6c9ce] me-2" />
-                        Log out
-                      </li>
-                    </ul>
-                  </PopoverBody>
-                </PopoverContent>
-              </Popover>
-              <div className="ps-2 flex items-center justify-center">
-                My Account{" "}
-                {isOpen ? (
-                  <IoIosArrowUp className="text-[#c6c9ce] ms-1" />
-                ) : (
-                  <IoIosArrowDown className="text-[#c6c9ce] ms-1" />
-                )}
-              </div>
-            </div>
-
-            <div>
-              <FaBell className="text-[#c6c9ce]" />
-            </div>
-            <button className="px-4 h-9 bg-[#0067e1] border border-[#0067e1] text-white fill-white hover:text-[#0067e1] hover:fill-[#0067e1] hover:bg-white rounded-md lg:font-semibold lg:text-sm text-[10px]">
-              <Link
-                href={"/dashboard"}
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                + NEW DEAL
-              </Link>
-            </button>
-          </div>
-        ) : (
-          <>
-            <button className="px-4 h-9 bg-[#0067e1] border border-[#0067e1] text-white fill-white hover:text-[#0067e1] hover:fill-[#0067e1] hover:bg-white rounded-md lg:font-semibold lg:text-sm text-[10px]">
-              <Link
-                href={"/login"}
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                Join For Free
-              </Link>
-            </button>
-            <button className="px-4 h-9 border rounded-md bg-white border-[#0067e1] text-[#0067e1] fill-white font-semibold lg:text-sm text-[10px] hidden md:block">
-              <Link
-                href={"/login"}
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                Log in
-              </Link>
-            </button>
-          </>
-        )}
+        <CTA session={session} />
       </div>
     </header>
   );

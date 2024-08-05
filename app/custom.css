@@ -8,14 +8,17 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
-
-  /* identical to box height */
-
   /* cobalt blue */
   color: #1b2738;
 }
+
+.ss_popup_a:hover {
+  background: #f1f1f1;
+  font-weight: 600;
+}
+
 .aside_back_color_003 {
-  color: #0367dd;
+  color: #0367dd !important;
 }
 .aside_back_color_003 svg path {
   fill: #0367dd !important;
@@ -138,4 +141,53 @@
   display: flex;
   column-gap: 12px;
   align-items: center;
+}
+
+.brd {
+  background: #f4f6f8;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  border-radius: 8px;
+}
+
+.table_title_text_003 {
+  /* font-family: "Nunito Sans"; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #637381;
+}
+
+.checkbox_table_003 {
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(27, 39, 56, 0.3);
+  border-radius: 3px;
+}
+
+#GoDelete {
+  display: none;
+}
+.listing_deal_para_title003 {
+  font-weight: 400 !important;
+}
+.Whoops_deal_head_003 {
+  /* font-family: "Nunito Sans"; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 29px;
+
+  color: #1b2738;
+}
+.nope_deal_txt_003 {
+  /* font-family: "Nunito Sans"; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+
+  color: #1b2738;
 }

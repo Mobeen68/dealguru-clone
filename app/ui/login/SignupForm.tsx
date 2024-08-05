@@ -18,12 +18,19 @@ const SignupForm = ({ setForm }: SignupFormProps) => {
   const handleSubmit = async (formData: FormData) => {
     // console.log(formData.get("password"));
     setLoading(true);
+    const mail: any = formData.get("email");
+    const username = `deal${mail?.slice(0, mail.indexOf("@"))}${Math.floor(
+      Math.random() * 1000
+    )}`;
+
     const r = await register({
       email: formData.get("email"),
       password: formData.get("password"),
       name: formData.get("name"),
+      username: username,
     });
-    ref.current?.reset();
+    console.log(r);
+
     if (r?.error) {
       setError(r.error);
       setLoading(false);
@@ -36,6 +43,8 @@ const SignupForm = ({ setForm }: SignupFormProps) => {
         duration: 3000,
         isClosable: true,
       });
+      ref.current?.reset();
+      setLoading(false);
       return setForm("login");
     }
   };

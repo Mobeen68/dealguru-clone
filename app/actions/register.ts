@@ -4,7 +4,13 @@ import User from "@/app/models/User";
 import bcrypt from "bcryptjs";
 
 export const register = async (values: any) => {
-  const { email, password, name } = values;
+  const { email, password, name, username } = values;
+
+  // Consolidate validation checks
+  if (!name) return { error: "Name is required" };
+  if (!email) return { error: "Email is required" };
+  if (!password) return { error: "Password is required" };
+  if (!username) return { error: "Username is required" };
 
   try {
     await connectDB();
@@ -20,10 +26,14 @@ export const register = async (values: any) => {
     const user = new User({
       name,
       email,
+      username,
       password: hashedPassword,
     });
+
     const savedUser = await user.save();
-  } catch (e) {
-    console.log(e);
+    return { message: "User registered successfully", user: savedUser };
+  } catch (error) {
+    console.error("Registration error:", error);
+    return { error: "An error occurred during registration" };
   }
 };
