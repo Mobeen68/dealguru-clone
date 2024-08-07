@@ -36,6 +36,12 @@ const UserSchema = new Schema<UserDocument>(
       type: String,
       required: [true, "Name is required"],
     },
+    phone: {
+      type: String,
+    },
+    image: {
+      type: String,
+    },
   },
   {
     timestamps: true,

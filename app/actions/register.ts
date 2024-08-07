@@ -31,7 +31,7 @@ export const register = async (values: any) => {
     });
 
     const savedUser = await user.save();
-    return { message: "User registered successfully", user: savedUser };
+    return { message: "User registered successfully" };
   } catch (error) {
     console.error("Registration error:", error);
     return { error: "An error occurred during registration" };

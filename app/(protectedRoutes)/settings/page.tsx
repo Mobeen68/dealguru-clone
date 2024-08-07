@@ -1,7 +1,42 @@
+"use client";
 import Image from "next/image";
 import avatar from "@/app/assets/images/blank_avatar.png";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 export default function SettingPage() {
+  const { data }: any = useSession();
+  console.log(data);
+
+  const [userData, setUserData] = useState<any>({
+    email: data?.user?.email,
+    firstName: data?.user?.name.split(" ")[0],
+    lastName: data?.user?.name.split(" ")[1],
+    username: "",
+    phone: "",
+    profilePic: "",
+  });
+
+  const handleSubmit = async (event: Event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("email", userData.email);
+    formData.append("phoneNumber", userData.phone);
+    if (userData.profilePic) formData.append("profilePic", userData.profilePic);
+
+    const res = await fetch("/api/user/updateProfile", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      console.log("Profile updated", data);
+    } else {
+      console.error("Error updating profile", data);
+    }
+  };
+
   return (
     <div className="w-full">
       <h1
@@ -18,7 +53,7 @@ export default function SettingPage() {
             <div className="py-4">
               <div className="w-full">
                 <Image
-                  src={avatar}
+                  src={userData.image || avatar}
                   alt="avatar"
                   className="avtar_image-default"
                   style={{
@@ -50,9 +85,10 @@ export default function SettingPage() {
                 </label>
                 <input
                   type="text"
+                  value={userData.username}
                   id="username"
                   className="ac_pc_input_003 py-2 px-4 md:px-5 w-full appearance-none border text-input text-xs lg:text-sm font-body rounded-md placeholder-body min-h-12 transition duration-200 ease-in-out bg-white  focus:outline-none focus:border-heading h-11 md:h-12"
-                  placeholder="mobeene"
+                  placeholder="Username"
                 />
               </div>
               <div className="block mt-3">
@@ -65,8 +101,9 @@ export default function SettingPage() {
                 <input
                   type="text"
                   id="firstName"
+                  value={userData.firstName}
                   className="ac_pc_input_003 py-2 px-4 md:px-5 w-full appearance-none border text-input text-xs lg:text-sm font-body rounded-md placeholder-body min-h-12 transition duration-200 ease-in-out bg-white  focus:outline-none focus:border-heading h-11 md:h-12"
-                  placeholder="Mobeen"
+                  placeholder="First name"
                 />
               </div>
             </div>
@@ -80,8 +117,9 @@ export default function SettingPage() {
               <input
                 type="text"
                 id="surname"
+                value={userData.lastName}
                 className="ac_pc_input_003 py-2 px-4 md:px-5 w-full appearance-none border text-input text-xs lg:text-sm font-body rounded-md placeholder-body min-h-12 transition duration-200 ease-in-out bg-white  focus:outline-none focus:border-heading h-11 md:h-12"
-                placeholder="Ejaz"
+                placeholder="Last name"
               />
             </div>
             <div className="block mt-3">
@@ -94,8 +132,9 @@ export default function SettingPage() {
               <input
                 type="email"
                 id="email"
+                value={userData.email}
                 className="ac_pc_input_003 py-2 px-4 md:px-5 w-full appearance-none border text-input text-xs lg:text-sm font-body rounded-md placeholder-body min-h-12 transition duration-200 ease-in-out bg-white  focus:outline-none focus:border-heading h-11 md:h-12"
-                placeholder="mobeene@me.com"
+                placeholder="Email"
               />
             </div>
             <label
@@ -110,6 +149,7 @@ export default function SettingPage() {
                 id="phone"
                 className="ac_pc_input_003 py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out border text-input text-xs lg:text-sm font-body rounded-md placeholder-body min-h-12 bg-white focus:outline-none focus:border-heading h-11 md:h-12"
                 placeholder=""
+                value={userData.phone}
               />
             </div>
             <div>
