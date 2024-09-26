@@ -2,38 +2,77 @@
 import Image from "next/image";
 import avatar from "@/app/assets/images/blank_avatar.png";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useToast } from "@chakra-ui/react";
 
 export default function SettingPage() {
   const { data }: any = useSession();
-  console.log(data);
+  // console.log(data);
+
+  const toast = useToast();
 
   const [userData, setUserData] = useState<any>({
     email: data?.user?.email,
-    firstName: data?.user?.name.split(" ")[0],
-    lastName: data?.user?.name.split(" ")[1],
+    firstName: "",
+    lastName: "",
     username: "",
     phone: "",
     profilePic: "",
   });
 
-  const handleSubmit = async (event: Event) => {
+  useEffect(() => {
+    setUserData({
+      email: data?.user?.email,
+      firstName: data?.user?.name.split(" ")[0],
+      lastName: data?.user?.name.split(" ")[1],
+      username: "",
+      phone: "",
+      profilePic: "",
+    });
+  }, [data]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserData((prevData: any) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // app/(protectedRoutes)/settings/page.tsx
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append("email", userData.email);
-    formData.append("phoneNumber", userData.phone);
-    if (userData.profilePic) formData.append("profilePic", userData.profilePic);
+    const formData = {
+      email: userData.email,
+      phoneNumber: userData.phone,
+      profilePic: userData.profilePic,
+    };
 
     const res = await fetch("/api/user/updateProfile", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     });
 
     const data = await res.json();
     if (res.ok) {
       console.log("Profile updated", data);
+      toast({
+        title: "Profile updated successfully.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
     } else {
       console.error("Error updating profile", data);
+      toast({
+        title: "Error updating profile.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
@@ -47,7 +86,10 @@ export default function SettingPage() {
       >
         Settings
       </h1>
-      <form action="" className="w-full mx-auto flex flex-col justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full mx-auto flex flex-col justify-center"
+      >
         <div className="flex flex-col md:flex-row w-full">
           <div className="md:w-2/6 2xl:w-8/12 mt-4 md:mt-0 pe-6">
             <div className="py-4">
@@ -85,7 +127,9 @@ export default function SettingPage() {
                 </label>
                 <input
                   type="text"
+                  name="username"
                   value={userData.username}
+                  onChange={handleChange}
                   id="username"
                   className="ac_pc_input_003 py-2 px-4 md:px-5 w-full appearance-none border text-input text-xs lg:text-sm font-body rounded-md placeholder-body min-h-12 transition duration-200 ease-in-out bg-white  focus:outline-none focus:border-heading h-11 md:h-12"
                   placeholder="Username"
@@ -100,8 +144,10 @@ export default function SettingPage() {
                 </label>
                 <input
                   type="text"
+                  name="firstName"
                   id="firstName"
                   value={userData.firstName}
+                  onChange={handleChange}
                   className="ac_pc_input_003 py-2 px-4 md:px-5 w-full appearance-none border text-input text-xs lg:text-sm font-body rounded-md placeholder-body min-h-12 transition duration-200 ease-in-out bg-white  focus:outline-none focus:border-heading h-11 md:h-12"
                   placeholder="First name"
                 />
@@ -116,8 +162,10 @@ export default function SettingPage() {
               </label>
               <input
                 type="text"
+                name="lastName"
                 id="surname"
                 value={userData.lastName}
+                onChange={handleChange}
                 className="ac_pc_input_003 py-2 px-4 md:px-5 w-full appearance-none border text-input text-xs lg:text-sm font-body rounded-md placeholder-body min-h-12 transition duration-200 ease-in-out bg-white  focus:outline-none focus:border-heading h-11 md:h-12"
                 placeholder="Last name"
               />
@@ -131,8 +179,10 @@ export default function SettingPage() {
               </label>
               <input
                 type="email"
+                name="email"
                 id="email"
                 value={userData.email}
+                onChange={handleChange}
                 className="ac_pc_input_003 py-2 px-4 md:px-5 w-full appearance-none border text-input text-xs lg:text-sm font-body rounded-md placeholder-body min-h-12 transition duration-200 ease-in-out bg-white  focus:outline-none focus:border-heading h-11 md:h-12"
                 placeholder="Email"
               />
@@ -146,14 +196,19 @@ export default function SettingPage() {
             <div className="flex">
               <input
                 type="text"
+                name="phone"
                 id="phone"
                 className="ac_pc_input_003 py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out border text-input text-xs lg:text-sm font-body rounded-md placeholder-body min-h-12 bg-white focus:outline-none focus:border-heading h-11 md:h-12"
                 placeholder=""
                 value={userData.phone}
+                onChange={handleChange}
               />
             </div>
             <div>
-              <button className="active-buton-transition pf_st_btn_003 mt-8 text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent rounded-md placeholder-white focus-visible:outline-none focus:outline-none bg-heading text-white px-5 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white hover:bg-gray-600 hover:shadow-cart h-12 mt-3 w-full">
+              <button
+                type="submit"
+                className="active-buton-transition pf_st_btn_003 mt-8 text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent rounded-md placeholder-white focus-visible:outline-none focus:outline-none bg-heading text-white px-5 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white hover:bg-gray-600 hover:shadow-cart h-12 mt-3 w-full"
+              >
                 Update your profile
               </button>
             </div>
