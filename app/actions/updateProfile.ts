@@ -1,3 +1,4 @@
+"use server";
 import { connectDB } from "../lib/mongodb";
 import User from "../models/User";
 
@@ -10,19 +11,23 @@ interface UpdateProfileData {
 }
 
 export async function updateProfile(data: UpdateProfileData) {
-  await connectDB();
+  try {
+    await connectDB();
+    const { email, phoneNumber, profilePic, name } = data;
 
-  const { email, phoneNumber, profilePic } = data;
+    const updatedUser = await User.findOneAndUpdate(
+      { email },
+      { phone: phoneNumber, profilePic, name },
+      { new: true }
+    );
 
-  const updatedUser = await User.findOneAndUpdate(
-    { email },
-    { phone: phoneNumber, profilePic },
-    { new: true }
-  );
+    if (!updatedUser) {
+      throw new Error('User not found');
+    }
 
-  if (!updatedUser) {
-    throw new Error("User not found");
+    return { success: true, data: updatedUser };
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    return { success: false, message: (error as Error).message };
   }
-
-  return updatedUser;
 }

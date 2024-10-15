@@ -4,6 +4,7 @@ import avatar from "@/app/assets/images/blank_avatar.png";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
+import { updateProfile } from "@/app/actions/updateProfile";
 
 export default function SettingPage() {
   const { data }: any = useSession();
@@ -42,33 +43,36 @@ export default function SettingPage() {
   // app/(protectedRoutes)/settings/page.tsx
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    const name = `${userData.firstName} ${userData.lastName}`;
     const formData = {
+      name: name,
       email: userData.email,
       phoneNumber: userData.phone,
       profilePic: userData.profilePic,
     };
-
-    const res = await fetch("/api/user/updateProfile", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-
-    const data = await res.json();
-    if (res.ok) {
-      console.log("Profile updated", data);
+    try {
+      const { success, data, message } = await updateProfile(formData);
+      if (success) {
+        console.log("Profile updated", data);
+        toast({
+          title: "Profile updated successfully.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        console.error("Error updating profile:", message);
+        toast({
+          title: `Error updating profile: ${message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
       toast({
-        title: "Profile updated successfully.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-    } else {
-      console.error("Error updating profile", data);
-      toast({
-        title: "Error updating profile.",
+        title: "Unexpected error occurred.",
         status: "error",
         duration: 3000,
         isClosable: true,
